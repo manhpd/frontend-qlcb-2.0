@@ -1,27 +1,73 @@
-# Frontend
+# Angular NestJS Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.16.
+This project is a full-stack application built with Angular for the frontend and NestJS for the backend, utilizing MySQL as the database. The frontend is styled using TailwindCSS.
 
-## Development server
+## Project Structure
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+angular-nestjs-project
+├── frontend
+│   ├── src
+│   │   ├── app
+│   │   ├── assets
+│   │   ├── environments
+│   │   └── styles
+│   ├── angular.json
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── tsconfig.json
+│   └── README.md
+├── backend
+│   ├── src
+│   │   ├── app.module.ts
+│   │   ├── main.ts
+│   │   ├── controllers
+│   │   ├── services
+│   │   └── entities
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── ormconfig.json
+│   └── README.md
+└── README.md
+```
 
-## Code scaffolding
+## Frontend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The frontend is developed using Angular 17 and styled with TailwindCSS. It includes:
 
-## Build
+- **Main Application Component**: Located in `frontend/src/app/app.component.ts` and `frontend/src/app/app.component.html`.
+- **Modules**: Defined in `frontend/src/app/app.module.ts`.
+- **Environment Configurations**: Found in `frontend/src/environments/`.
+- **Static Assets**: Stored in `frontend/src/assets/`.
+- **TailwindCSS Styles**: Included in `frontend/src/styles/tailwind.css`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To run the frontend, navigate to the `frontend` directory and use the following commands:
 
-## Running unit tests
+```bash
+npm install
+npm start
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Backend
 
-## Running end-to-end tests
+The backend is built with NestJS and connects to a MySQL database. It includes:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Main Application Module**: Defined in `backend/src/app.module.ts`.
+- **Entry Point**: Located in `backend/src/main.ts`.
+- **Controllers and Services**: Found in `backend/src/controllers/` and `backend/src/services/`.
+- **Entities**: Defined in `backend/src/entities/`.
 
-## Further help
+To run the backend, navigate to the `backend` directory and use the following commands:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm install
+npm run start
+```
+
+## Database Configuration
+
+The project uses MySQL as the database. Configuration settings can be found in `backend/ormconfig.json`.
+
+## Conclusion
+
+This project serves as a template for building full-stack applications using Angular and NestJS. Customize and extend it according to your needs.
