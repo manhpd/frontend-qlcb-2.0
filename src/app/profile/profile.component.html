@@ -1,0 +1,143 @@
+
+    <div class="px-4 py-6 sm:px-0">
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">User Profile</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and information.</p>
+        </div>
+        <div class="border-t border-gray-200">
+          <dl>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Username</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ user?.username }}</dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Email</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div *ngIf="!isEditingEmail">
+                  {{ user?.email }}
+                  <button 
+                    (click)="startEditing('email')" 
+                    class="ml-2 text-indigo-600 hover:text-indigo-900"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div *ngIf="isEditingEmail" class="flex items-center">
+                  <input 
+                    type="email" 
+                    [(ngModel)]="editedEmail" 
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  />
+                  <button 
+                    (click)="saveEmail()" 
+                    class="ml-2 text-green-600 hover:text-green-900"
+                  >
+                    Save
+                  </button>
+                  <button 
+                    (click)="cancelEditing('email')" 
+                    class="ml-2 text-red-600 hover:text-red-900"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">First Name</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div *ngIf="!isEditingFirstName">
+                  {{ user?.firstName || 'Not set' }}
+                  <button 
+                    (click)="startEditing('firstName')" 
+                    class="ml-2 text-indigo-600 hover:text-indigo-900"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div *ngIf="isEditingFirstName" class="flex items-center">
+                  <input 
+                    type="text" 
+                    [(ngModel)]="editedFirstName" 
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  />
+                  <button 
+                    (click)="saveFirstName()" 
+                    class="ml-2 text-green-600 hover:text-green-900"
+                  >
+                    Save
+                  </button>
+                  <button 
+                    (click)="cancelEditing('firstName')" 
+                    class="ml-2 text-red-600 hover:text-red-900"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Last Name</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div *ngIf="!isEditingLastName">
+                  {{ user?.lastName || 'Not set' }}
+                  <button 
+                    (click)="startEditing('lastName')" 
+                    class="ml-2 text-indigo-600 hover:text-indigo-900"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div *ngIf="isEditingLastName" class="flex items-center">
+                  <input 
+                    type="text" 
+                    [(ngModel)]="editedLastName" 
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  />
+                  <button 
+                    (click)="saveLastName()" 
+                    class="ml-2 text-green-600 hover:text-green-900"
+                  >
+                    Save
+                  </button>
+                  <button 
+                    (click)="cancelEditing('lastName')" 
+                    class="ml-2 text-red-600 hover:text-red-900"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Role</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ user?.role }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      
+      <div *ngIf="error" class="mt-4 bg-red-50 border-l-4 border-red-400 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-700">
+              {{ error }}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="isLoading" class="mt-4 flex justify-center">
+        <svg class="animate-spin h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span class="ml-2 text-sm text-gray-500">Updating profile...</span>
+      </div>
+    </div>

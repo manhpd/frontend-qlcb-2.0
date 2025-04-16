@@ -79,4 +79,14 @@ export class AuthService {
   getCurrentUser(): Observable<User | null> {
     return this.currentUser$;
   }
+
+  updateProfile(userData: {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+  }) {
+    return this.http.put<User>(`${this.apiUrl}/profile`, userData, { headers: this.getHeaders() }).pipe(
+      tap(user => this.currentUserSubject.next(user))
+    );
+  }
 }
